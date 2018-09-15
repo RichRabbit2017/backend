@@ -1,6 +1,8 @@
 package com.mindgray.cleanwheels.service;
 
 
+import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
+import com.mindgray.cleanwheels.exception.CleanWheelsException;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,46 +22,48 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public RegistrationDto registerUSer(Integer mobile, String emailId, String password) {
-        User user = new User(mobile, emailId, password, RandomStringUtils.random(10, true, true));
-        User registerdUser = userRepository.save(user);
-        return new RegistrationDto(registerdUser.getUsername());
+    public RegistrationDto registerUSer(RegisterRequestDTO registerRequestDTO) throws Exception {
+			User user = new User(registerRequestDTO.getMobile(), registerRequestDTO.getEmail(), registerRequestDTO.getPassword(), RandomStringUtils.random(4, true, true));
+			User registerdUser = userRepository.save(user);
+			return new RegistrationDto(registerdUser.getUser_id());
+
     }
 
+
 	@Override
-	public LoginDto loginUser(Integer mobile, String emailId, String password) {
-		return userRepository.authenticateLogin(mobile, emailId, password);
+	public LoginDto loginUser(RegisterRequestDTO registerRequestDTO) {
+		return userRepository.authenticateLogin(registerRequestDTO.getMobile(), registerRequestDTO.getEmail(), registerRequestDTO.getPassword());
 	}
 
 	@Override
-	public ResetPasswordDto resetPassword(Integer mobile, String emailId, String password) {
-		User user = userRepository.findUserByMobileOrEmail(mobile, emailId);
-		if (user != null) {
-			user.setPassword(password);
+	public ResetPasswordDto resetPassword(RegisterRequestDTO registerRequestDTO) {
+		User user = userRepository.findUserByMobileOrEmail(registerRequestDTO.getMobile(), registerRequestDTO.getEmail());
+		if (user != null && registerRequestDTO.getPassword()!=null && !registerRequestDTO.getPassword().isEmpty()) {
+			user.setPassword(registerRequestDTO.getPassword());
 			user = userRepository.save(user);
-			return new ResetPasswordDto(user.getUsername(), null);
+			return new ResetPasswordDto(user.getUser_id(), null);
 		}
 		return new ResetPasswordDto(null, null);
 	}
 	
 	@Override
 	   public UserProfileDto getProfile(String username) {
-	       User user = userRepository.findUserByUsername(username);
+	       User user = userRepository.findUserByUserId(username);
 	       if(user!=null) {
-	          return new UserProfileDto(user.getUsername(),user.getName(),"",user.getMobile(),"",user.getCity(),user.getSociety(),user.getSector(),user.getFlatNo());
+	          return new UserProfileDto(user.getUser_id(),user.getF_name(),"",user.getMobile(),"",user.getCity(),user.getSociety(),user.getSector(),user.getFlatNo());
 	       }else
 	       return null;
 	   }
 	   @Transactional
 	   @Override
 	   public UserProfileDto updateProfile(UserProfileDto userProfileDto) {
-	       User user = userRepository.findUserByUsername(userProfileDto.getUsername());
+	       User user = userRepository.findUserByUserId(userProfileDto.getUsername());
 	       if(user!=null) {
 	           user.setCity(userProfileDto.getCity());
 	           user.setSector(userProfileDto.getSector());
 	           user.setFlatNo(userProfileDto.getFlatNo());
 	           user.setMobile(userProfileDto.getMobile());
-	           user.setName(userProfileDto.getFirst_name());
+	           user.setF_name(userProfileDto.getFirst_name());
 	          user = userRepository.save(user);
 	           return userProfileDto;
 	       }else

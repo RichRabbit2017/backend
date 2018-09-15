@@ -1,5 +1,10 @@
 package com.mindgray.cleanwheels.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({"success","code", "message", "response"})
 public class ResponseBody {
 
 	private Boolean success;

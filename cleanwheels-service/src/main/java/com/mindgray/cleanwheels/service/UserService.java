@@ -4,14 +4,15 @@ import com.mindgray.cleanwheels.dto.LoginDto;
 import com.mindgray.cleanwheels.dto.RegistrationDto;
 import com.mindgray.cleanwheels.dto.ResetPasswordDto;
 import com.mindgray.cleanwheels.dto.UserProfileDto;
+import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
 
 public interface UserService {
 
-	RegistrationDto registerUSer(Integer mobile, String emailId, String password);
+	RegistrationDto registerUSer(RegisterRequestDTO registerRequestDTO) throws Exception;
 
-	LoginDto loginUser(Integer mobile, String emailId, String password);
+	LoginDto loginUser(RegisterRequestDTO registerRequestDTO);
 
-	ResetPasswordDto resetPassword(Integer mobile, String emailId, String password);
+	ResetPasswordDto resetPassword(RegisterRequestDTO registerRequestDTO);
 
 	UserProfileDto getProfile(String username);
 

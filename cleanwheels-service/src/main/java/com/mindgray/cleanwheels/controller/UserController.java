@@ -1,5 +1,9 @@
 package com.mindgray.cleanwheels.controller;
 
+import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
+import com.mindgray.cleanwheels.exception.CleanWheelsException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,24 +23,31 @@ import com.mindgray.cleanwheels.service.UserService;
 @RestController
 @CrossOrigin
 public class UserController {
+    private final Logger logger = LoggerFactory.getLogger(UserController.class.getSimpleName());
 
     @Autowired
     UserService userService;
 
     @PostMapping(value = "/register")
-    public ResponseBody register(@RequestParam(required = true) Integer phone, 
-    		@RequestParam(required = true) String emailId, @RequestParam(required = true) String password) {
-    	RegistrationDto registrationDto = userService.registerUSer(phone, emailId, password);
+    public ResponseBody register(@RequestBody RegisterRequestDTO registerRequestDTO) {
+        try {
+            RegistrationDto registrationDto = userService.registerUSer(registerRequestDTO);
+
+
         if (registrationDto.getUserId() != null)
             return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), registrationDto);
         else
             return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+        }catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            throw new CleanWheelsException(CwMessages.REGISTRATION_FAILED.message(),CwMessages.REGISTRATION_FAILED.code());
+        }
     }
     
     @PostMapping(value = "/login")
-    public ResponseBody login(@RequestParam(required = false) Integer phone, 
-    		@RequestParam(required = false) String emailId, @RequestParam(required = true) String password) {
-    	LoginDto loginDto = userService.loginUser(phone, emailId, password);
+    public ResponseBody login(@RequestBody RegisterRequestDTO registerRequestDTO) {
+    	LoginDto loginDto = userService.loginUser(registerRequestDTO);
         if (loginDto != null && loginDto.getUserId() != null)
             return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), loginDto);
         else
@@ -44,9 +55,8 @@ public class UserController {
     }
     
     @PostMapping(value = "/resetPassword")
-    public ResponseBody resetPassword(@RequestParam(required = false) Integer phone, 
-    		@RequestParam(required = false) String emailId, @RequestParam(required = true) String password) {
-    	ResetPasswordDto loginDto = userService.resetPassword(phone, emailId, password);
+    public ResponseBody resetPassword(@RequestBody RegisterRequestDTO registerRequestDTO) {
+    	ResetPasswordDto loginDto = userService.resetPassword(registerRequestDTO);
         if (loginDto != null && loginDto.getUserId() != null)
             return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), loginDto);
         else

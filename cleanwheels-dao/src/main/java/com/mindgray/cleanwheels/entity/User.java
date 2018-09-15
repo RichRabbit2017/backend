@@ -20,26 +20,23 @@ public class User implements Serializable {
 	@Column(unique=true, nullable=false)
 	private Integer id;
 
-	@Column(length=45)
-	private String city;
+	@Column(name = "user_id",length=45)
+	private String userId;
 
-	@Column(name="flat_no", length=45)
-	private String flatNo;
+	@Column(length=45)
+	private String f_name;
+
+	@Column(length=45)
+	private String l_name;
+
+	@Column(nullable=false, length=50, unique=true)
+	private String email;
 
 	@Column(name="mobile", unique=true)
 	private Integer mobile;
 
 	@Column(length=45)
-	private String name;
-
-	@Column(name="parking_no", length=45)
-	private String parkingNo;
-
-	@Column(nullable=false, length=45)
-	private String password;
-
-	@Column(nullable=false, length=45, unique=true)
-	private String email;
+	private String city;
 
 	@Column(length=45)
 	private String sector;
@@ -47,8 +44,14 @@ public class User implements Serializable {
 	@Column(length=45)
 	private String society;
 
-	@Column(length=45)
-	private String username;
+	@Column(name="flat_no", length=45)
+	private String flatNo;
+
+	@Column(name="parking_no", length=45)
+	private String parkingNo;
+
+	@Column(nullable=false, length=45)
+	private String password;
 
 	//bi-directional many-to-one association to Helpdesk
 	@OneToMany(mappedBy="user")
@@ -71,7 +74,15 @@ public class User implements Serializable {
 		this.mobile = mobileNumber;
 		this.password = password;
 		this.email = email;
-		this.username =username;
+		this.userId =username;
+	}
+
+	public String getL_name() {
+		return l_name;
+	}
+
+	public void setL_name(String l_name) {
+		this.l_name = l_name;
 	}
 
 	public Integer getId() {
@@ -106,12 +117,12 @@ public class User implements Serializable {
 		this.mobile = mobile;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getF_name() {
+		return this.f_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setF_name(String f_name) {
+		this.f_name = f_name;
 	}
 
 	public String getParkingNo() {
@@ -146,12 +157,12 @@ public class User implements Serializable {
 		this.society = society;
 	}
 
-	public String getUsername() {
-		return this.username;
+	public String getUser_id() {
+		return this.userId;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser_id(String user_id) {
+		this.userId = user_id;
 	}
 
 	public List<Helpdesk> getHelpdesks() {

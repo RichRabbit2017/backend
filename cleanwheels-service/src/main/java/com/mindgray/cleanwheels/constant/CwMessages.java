@@ -4,13 +4,15 @@ public enum CwMessages {
 
 	//#Common message and code
 	SUCCESS("0000","success"),
+
 	UNAVAILABLE("0001","No result found"),
 	UNAUTHORIZED("0002","Authentication failed"),
+	REGISTRATION_FAILED("4001","Registration failed"),
 	FAILED("0003","failed"),
 	
 
 	
-	UNKNOWN("9999","");
+	UNKNOWN("1000","");
 
 	private String code;
 	private String message;

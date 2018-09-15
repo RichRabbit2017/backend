@@ -14,7 +14,7 @@ import com.mindgray.cleanwheels.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "select new com.mindgray.cleanwheels.dto.LoginDto("
-            + " u.username) "
+            + " u.userId) "
             + " from User u "
             + " where u.password=:password "
             + " and (u.mobile=:mobile OR u.email=:email) ")
@@ -25,6 +25,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     
     User findUserByMobileOrEmail(Integer mobile, String email);
     
-    User findUserByUsername(String username);
+    User findUserByUserId(String userid);
 
 }
