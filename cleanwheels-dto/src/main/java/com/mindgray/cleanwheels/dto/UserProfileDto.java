@@ -6,7 +6,6 @@ public class UserProfileDto implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String username;
 	private String first_name;
     private String last_name;
     private Integer mobile;
@@ -17,7 +16,6 @@ public class UserProfileDto implements Serializable {
     private String flatNo;
 
     public UserProfileDto(String username, String first_name, String last_name, Integer mobile, String emailId, String city, String society, String sector, String flatNo) {
-        this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.mobile = mobile;
@@ -32,13 +30,6 @@ public class UserProfileDto implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
     
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getFirst_name() {
         return first_name;

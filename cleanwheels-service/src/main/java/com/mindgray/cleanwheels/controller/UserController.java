@@ -1,6 +1,8 @@
 package com.mindgray.cleanwheels.controller;
 
+import com.mindgray.cleanwheels.dto.requestDto.ProfileRequestDTO;
 import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
+import com.mindgray.cleanwheels.dto.requestDto.UpdateProfileRequestDTO;
 import com.mindgray.cleanwheels.exception.CleanWheelsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,39 +49,63 @@ public class UserController {
     
     @PostMapping(value = "/login")
     public ResponseBody login(@RequestBody RegisterRequestDTO registerRequestDTO) {
-    	LoginDto loginDto = userService.loginUser(registerRequestDTO);
-        if (loginDto != null && loginDto.getUserId() != null)
-            return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), loginDto);
-        else
-            return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+        try {
+            LoginDto loginDto = userService.loginUser(registerRequestDTO);
+            if (loginDto != null && loginDto.getUserId() != null)
+                return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), loginDto);
+            else
+                return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+        }catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            throw new CleanWheelsException(e.getMessage(),CwMessages.UNKNOWN.code());
+        }
     }
     
     @PostMapping(value = "/resetPassword")
     public ResponseBody resetPassword(@RequestBody RegisterRequestDTO registerRequestDTO) {
-    	ResetPasswordDto loginDto = userService.resetPassword(registerRequestDTO);
-        if (loginDto != null && loginDto.getUserId() != null)
-            return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), loginDto);
-        else
-            return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+        try {
+            ResetPasswordDto loginDto = userService.resetPassword(registerRequestDTO);
+            if (loginDto != null && loginDto.getUserId() != null)
+                return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), loginDto);
+            else
+                return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+        }catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            throw new CleanWheelsException(e.getMessage(),CwMessages.UNKNOWN.code());
+        }
     }
     
     @PostMapping(value = "/getProfile",consumes={MediaType.APPLICATION_JSON_VALUE})
-    public ResponseBody getProfile(@RequestParam(required = true) String username) {
-      UserProfileDto user = userService.getProfile(username);
-           if(user!=null)
-               return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), user);
+    public ResponseBody getProfile(@RequestBody ProfileRequestDTO profileRequestDTO) {
+        try {
+            UserProfileDto user = userService.getProfile(profileRequestDTO);
+            if (user != null)
+                return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), user);
             else
-               return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+                return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+        }catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            throw new CleanWheelsException(e.getMessage(),CwMessages.UNKNOWN.code());
+        }
 
     }
 
     @PostMapping(value = {"/updateProfile"},consumes={MediaType.APPLICATION_JSON_VALUE})
-    public ResponseBody getProfile(@RequestBody UserProfileDto userProfileDto) {
-    	UserProfileDto user = userService.updateProfile(userProfileDto);
-        if(user!=null)
-            return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), user);
-        else
-            return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+    public ResponseBody getProfile(@RequestBody UpdateProfileRequestDTO updateProfileRequestDTO) {
+        try {
+            UpdateProfileRequestDTO user = userService.updateProfile(updateProfileRequestDTO);
+            if (user != null)
+                return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), user);
+            else
+                return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+        }catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            throw new CleanWheelsException(e.getMessage(),CwMessages.UNKNOWN.code());
+        }
 
     }
 }

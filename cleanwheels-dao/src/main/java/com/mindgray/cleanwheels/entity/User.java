@@ -109,6 +109,14 @@ public class User implements Serializable {
 		this.flatNo = flatNo;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Integer getMobile() {
 		return this.mobile;
 	}

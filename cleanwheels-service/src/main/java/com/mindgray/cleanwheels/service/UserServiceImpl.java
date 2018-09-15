@@ -1,7 +1,9 @@
 package com.mindgray.cleanwheels.service;
 
 
+import com.mindgray.cleanwheels.dto.requestDto.ProfileRequestDTO;
 import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
+import com.mindgray.cleanwheels.dto.requestDto.UpdateProfileRequestDTO;
 import com.mindgray.cleanwheels.exception.CleanWheelsException;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +33,12 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public LoginDto loginUser(RegisterRequestDTO registerRequestDTO) {
+	public LoginDto loginUser(RegisterRequestDTO registerRequestDTO) throws Exception {
 		return userRepository.authenticateLogin(registerRequestDTO.getMobile(), registerRequestDTO.getEmail(), registerRequestDTO.getPassword());
 	}
 
 	@Override
-	public ResetPasswordDto resetPassword(RegisterRequestDTO registerRequestDTO) {
+	public ResetPasswordDto resetPassword(RegisterRequestDTO registerRequestDTO) throws Exception {
 		User user = userRepository.findUserByMobileOrEmail(registerRequestDTO.getMobile(), registerRequestDTO.getEmail());
 		if (user != null && registerRequestDTO.getPassword()!=null && !registerRequestDTO.getPassword().isEmpty()) {
 			user.setPassword(registerRequestDTO.getPassword());
@@ -47,8 +49,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	   public UserProfileDto getProfile(String username) {
-	       User user = userRepository.findUserByUserId(username);
+	   public UserProfileDto getProfile(ProfileRequestDTO profileRequestDTO) throws Exception {
+	       User user = userRepository.findUserByUserId(profileRequestDTO.getUserId());
 	       if(user!=null) {
 	          return new UserProfileDto(user.getUser_id(),user.getF_name(),"",user.getMobile(),"",user.getCity(),user.getSociety(),user.getSector(),user.getFlatNo());
 	       }else
@@ -56,16 +58,18 @@ public class UserServiceImpl implements UserService {
 	   }
 	   @Transactional
 	   @Override
-	   public UserProfileDto updateProfile(UserProfileDto userProfileDto) {
-	       User user = userRepository.findUserByUserId(userProfileDto.getUsername());
+	   public UpdateProfileRequestDTO updateProfile(UpdateProfileRequestDTO updateProfileRequestDTO) throws Exception {
+	       User user = userRepository.findUserByUserId(updateProfileRequestDTO.getUserId());
 	       if(user!=null) {
-	           user.setCity(userProfileDto.getCity());
-	           user.setSector(userProfileDto.getSector());
-	           user.setFlatNo(userProfileDto.getFlatNo());
-	           user.setMobile(userProfileDto.getMobile());
-	           user.setF_name(userProfileDto.getFirst_name());
+	           user.setCity(updateProfileRequestDTO.getCity());
+	           user.setSector(updateProfileRequestDTO.getSector());
+			   user.setSociety(updateProfileRequestDTO.getSociety());
+	           user.setFlatNo(updateProfileRequestDTO.getFlatNo());
+	           user.setF_name(updateProfileRequestDTO.getFirst_name());
+			   user.setL_name(updateProfileRequestDTO.getLast_name());
+			   user.setEmail(updateProfileRequestDTO.getEmail());
 	          user = userRepository.save(user);
-	           return userProfileDto;
+	           return updateProfileRequestDTO;
 	       }else
 	           return null;
 	   }
