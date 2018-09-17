@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	   public UserProfileDto getProfile(ProfileRequestDTO profileRequestDTO) throws Exception {
-	       User user = userRepository.findUserByUserId(profileRequestDTO.getUserId());
+	       User user = userRepository.getOne(profileRequestDTO.getUserId());
 	       if(user!=null) {
 	          return new UserProfileDto(user.getUser_id(),user.getF_name(),"",user.getMobile(),"",user.getCity(),user.getSociety(),user.getSector(),user.getFlatNo());
 	       }else
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 	   @Transactional
 	   @Override
 	   public UpdateProfileRequestDTO updateProfile(UpdateProfileRequestDTO updateProfileRequestDTO) throws Exception {
-	       User user = userRepository.findUserByUserId(updateProfileRequestDTO.getUserId());
+	       User user = userRepository.getOne(updateProfileRequestDTO.getUserId());
 	       if(user!=null) {
 	           user.setCity(updateProfileRequestDTO.getCity());
 	           user.setSector(updateProfileRequestDTO.getSector());

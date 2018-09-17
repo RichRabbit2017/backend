@@ -16,10 +16,6 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
-	private Integer id;
-
 	@Column(name = "user_id",length=45)
 	private String userId;
 
@@ -83,14 +79,6 @@ public class User implements Serializable {
 
 	public void setL_name(String l_name) {
 		this.l_name = l_name;
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getCity() {

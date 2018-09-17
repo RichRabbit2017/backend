@@ -1,9 +1,5 @@
 package com.mindgray.cleanwheels.controller;
 
-import com.mindgray.cleanwheels.dto.requestDto.ProfileRequestDTO;
-import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
-import com.mindgray.cleanwheels.dto.requestDto.UpdateProfileRequestDTO;
-import com.mindgray.cleanwheels.exception.CleanWheelsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mindgray.cleanwheels.constant.CwMessages;
@@ -19,6 +14,10 @@ import com.mindgray.cleanwheels.dto.LoginDto;
 import com.mindgray.cleanwheels.dto.RegistrationDto;
 import com.mindgray.cleanwheels.dto.ResetPasswordDto;
 import com.mindgray.cleanwheels.dto.UserProfileDto;
+import com.mindgray.cleanwheels.dto.requestDto.ProfileRequestDTO;
+import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
+import com.mindgray.cleanwheels.dto.requestDto.UpdateProfileRequestDTO;
+import com.mindgray.cleanwheels.exception.CleanWheelsException;
 import com.mindgray.cleanwheels.response.ResponseBody;
 import com.mindgray.cleanwheels.service.UserService;
 

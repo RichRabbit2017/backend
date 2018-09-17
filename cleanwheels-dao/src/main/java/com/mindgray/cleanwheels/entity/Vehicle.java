@@ -1,58 +1,72 @@
 package com.mindgray.cleanwheels.entity;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.List;
-
 
 /**
  * The persistent class for the vehicle database table.
  * 
  */
 @Entity
-@Table(name="vehicle")
-@NamedQuery(name="Vehicle.findAll", query="SELECT v FROM Vehicle v")
+@Table(name = "vehicle")
+@NamedQuery(name = "Vehicle.findAll", query = "SELECT v FROM Vehicle v")
 public class Vehicle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(unique = true, nullable = false)
+	private Integer id;
 
-	@Column(length=45)
+	@Column(length = 45)
 	private String category;
 
-	@Column(length=45)
+	@Column(length = 45)
 	private String name;
 
-	@Column(length=45)
+	@Column(length = 45, unique=true)
 	private String num;
 
-	@Column(length=45)
+	@Column(length = 45)
 	private String type;
 
-	//bi-directional many-to-one association to Helpdesk
-	@OneToMany(mappedBy="vehicle")
+	@Column(length = 45)
+	private String parkingNo;
+
+	// bi-directional many-to-one association to Helpdesk
+	@OneToMany(mappedBy = "vehicle")
 	private List<Helpdesk> helpdesks;
 
-	//bi-directional many-to-one association to User
+	// bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="user_id", nullable=false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	//bi-directional many-to-one association to VehicleCleanerTx
-	@OneToMany(mappedBy="vehicle")
+	// bi-directional many-to-one association to VehicleCleanerTx
+	@OneToMany(mappedBy = "vehicle")
 	private List<VehicleCleanerTx> vehicleCleanerTxs;
 
 	public Vehicle() {
+
 	}
 
-	public int getId() {
-		return this.id;
+	public Vehicle(String parkingNo, String vechileNo, String vehicleCategory,
+			String vehicleType, User user) {
+		super();
+		this.parkingNo = parkingNo;
+		this.category = vehicleCategory;
+		this.num = vechileNo;
+		this.type = vehicleType;
+		this.user = user;
 	}
 
-	public void setId(int id) {
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -126,14 +140,24 @@ public class Vehicle implements Serializable {
 		this.vehicleCleanerTxs = vehicleCleanerTxs;
 	}
 
-	public VehicleCleanerTx addVehicleCleanerTx(VehicleCleanerTx vehicleCleanerTx) {
+	public String getParkingNo() {
+		return parkingNo;
+	}
+
+	public void setParkingNo(String parkingNo) {
+		this.parkingNo = parkingNo;
+	}
+
+	public VehicleCleanerTx addVehicleCleanerTx(
+			VehicleCleanerTx vehicleCleanerTx) {
 		getVehicleCleanerTxs().add(vehicleCleanerTx);
 		vehicleCleanerTx.setVehicle(this);
 
 		return vehicleCleanerTx;
 	}
 
-	public VehicleCleanerTx removeVehicleCleanerTx(VehicleCleanerTx vehicleCleanerTx) {
+	public VehicleCleanerTx removeVehicleCleanerTx(
+			VehicleCleanerTx vehicleCleanerTx) {
 		getVehicleCleanerTxs().remove(vehicleCleanerTx);
 		vehicleCleanerTx.setVehicle(null);
 
