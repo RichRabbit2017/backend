@@ -7,141 +7,196 @@ import java.util.List;
 
 /**
  * The persistent class for the contractor database table.
- * 
  */
 @Entity
-@Table(name="contractor")
-@NamedQuery(name="Contractor.findAll", query="SELECT c FROM Contractor c")
+@Table(name = "contractor")
+@NamedQuery(name = "Contractor.findAll", query = "SELECT c FROM Contractor c")
 public class Contractor implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, nullable = false)
+    private int id;
 
-	@Column(length=45)
-	private String address;
+    @Column(length = 45)
+    private String address;
 
-	@Column(name="alternate_mobile")
-	private int alternateMobile;
+    @Column(length = 11,name = "alternate_mobile")
+    private int alternateMobile;
 
-	@Column(length=45)
-	private String bank;
+    @Column(length = 45)
+    private String bank;
 
-	@Column(name="bank_account", length=45)
-	private String bankAccount;
+    @Column(nullable = false)
+    private Integer location_id;
 
-	@Column(name="bank_ifsc", length=45)
-	private String bankIfsc;
+    @Column(name = "bank_account", length = 45)
+    private int bankAccount;
 
-	private int mobile;
+    @Column(name = "bank_ifsc", length = 45)
+    private String bankIfsc;
 
-	@Column(length=45)
-	private String name;
+    @Column(length = 11, nullable = false)
+    private int mobile;
 
-	@Column(length=45)
-	private String pan;
+    @Column(length = 45,nullable = false)
+    private String f_name;
 
-	//bi-directional many-to-one association to LocationContractorTx
-	@OneToMany(mappedBy="contractor")
-	private List<LocationContractorTx> locationContractorTxs;
+    @Column(length = 45)
+    private String l_name;
 
-	public Contractor() {
-	}
+    @Column(length = 45)
+    private String pan;
 
-	public int getId() {
-		return this.id;
-	}
+    @Column(length = 45, nullable = false)
+    private String email;
+    /*status - contractor is active or not */
+    @Column(length = 45, nullable = false)
+    private int status;
+    /* current load of contrator service is full or not*/
+    @Column(name = "load_status", length = 45, nullable = false)
+    private int loadStatus;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    //bi-directional many-to-one association to LocationContractorTx
+    @OneToMany(mappedBy = "contractor")
+    private List<LocationContractorTx> locationContractorTxs;
 
-	public String getAddress() {
-		return this.address;
-	}
+    public Contractor() {
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public Integer getLocation_id() {
+        return location_id;
+    }
 
-	public int getAlternateMobile() {
-		return this.alternateMobile;
-	}
+    public void setLocation_id(Integer location_id) {
+        this.location_id = location_id;
+    }
 
-	public void setAlternateMobile(int alternateMobile) {
-		this.alternateMobile = alternateMobile;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getBank() {
-		return this.bank;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setBank(String bank) {
-		this.bank = bank;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public String getBankAccount() {
-		return this.bankAccount;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public void setBankAccount(String bankAccount) {
-		this.bankAccount = bankAccount;
-	}
+    public Integer getLoadStatus() {
+        return loadStatus;
+    }
 
-	public String getBankIfsc() {
-		return this.bankIfsc;
-	}
+    public void setLoadStatus(Integer loadStatus) {
+        this.loadStatus = loadStatus;
+    }
 
-	public void setBankIfsc(String bankIfsc) {
-		this.bankIfsc = bankIfsc;
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public int getMobile() {
-		return this.mobile;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setMobile(int mobile) {
-		this.mobile = mobile;
-	}
+    public String getAddress() {
+        return this.address;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public int getAlternateMobile() {
+        return this.alternateMobile;
+    }
 
-	public String getPan() {
-		return this.pan;
-	}
+    public void setAlternateMobile(int alternateMobile) {
+        this.alternateMobile = alternateMobile;
+    }
 
-	public void setPan(String pan) {
-		this.pan = pan;
-	}
+    public String getBank() {
+        return this.bank;
+    }
 
-	public List<LocationContractorTx> getLocationContractorTxs() {
-		return this.locationContractorTxs;
-	}
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
 
-	public void setLocationContractorTxs(List<LocationContractorTx> locationContractorTxs) {
-		this.locationContractorTxs = locationContractorTxs;
-	}
+    public Integer getBankAccount() {
+        return this.bankAccount;
+    }
 
-	public LocationContractorTx addLocationContractorTx(LocationContractorTx locationContractorTx) {
-		getLocationContractorTxs().add(locationContractorTx);
-		locationContractorTx.setContractor(this);
+    public void setBankAccount(Integer bankAccount) {
+        this.bankAccount = bankAccount;
+    }
 
-		return locationContractorTx;
-	}
+    public String getBankIfsc() {
+        return this.bankIfsc;
+    }
 
-	public LocationContractorTx removeLocationContractorTx(LocationContractorTx locationContractorTx) {
-		getLocationContractorTxs().remove(locationContractorTx);
-		locationContractorTx.setContractor(null);
+    public void setBankIfsc(String bankIfsc) {
+        this.bankIfsc = bankIfsc;
+    }
 
-		return locationContractorTx;
-	}
+    public int getMobile() {
+        return this.mobile;
+    }
+
+    public void setMobile(int mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getF_name() {
+        return f_name;
+    }
+
+    public void setF_name(String f_name) {
+        this.f_name = f_name;
+    }
+
+    public String getL_name() {
+        return l_name;
+    }
+
+    public void setL_name(String l_name) {
+        this.l_name = l_name;
+    }
+
+    public String getPan() {
+        return this.pan;
+    }
+
+    public void setPan(String pan) {
+        this.pan = pan;
+    }
+
+    public List<LocationContractorTx> getLocationContractorTxs() {
+        return this.locationContractorTxs;
+    }
+
+    public void setLocationContractorTxs(List<LocationContractorTx> locationContractorTxs) {
+        this.locationContractorTxs = locationContractorTxs;
+    }
+
+    public LocationContractorTx addLocationContractorTx(LocationContractorTx locationContractorTx) {
+        getLocationContractorTxs().add(locationContractorTx);
+        locationContractorTx.setContractor(this);
+
+        return locationContractorTx;
+    }
+
+    public LocationContractorTx removeLocationContractorTx(LocationContractorTx locationContractorTx) {
+        getLocationContractorTxs().remove(locationContractorTx);
+        locationContractorTx.setContractor(null);
+
+        return locationContractorTx;
+    }
 
 }
