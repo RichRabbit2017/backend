@@ -26,6 +26,9 @@ public class Location implements Serializable {
 	@Column(length=45)
 	private String society;
 
+	@OneToMany(mappedBy="location")
+	private List<Cleaner> cleaners;
+
 	//bi-directional many-to-one association to LocationContractorTx
 	@OneToMany(mappedBy="location")
 	private List<LocationContractorTx> locationContractorTxs;
@@ -108,4 +111,11 @@ public class Location implements Serializable {
 		this.promotions = promotions;
 	}
 
+	public List<Cleaner> getCleaners() {
+		return cleaners;
+	}
+
+	public void setCleaners(List<Cleaner> cleaners) {
+		this.cleaners = cleaners;
+	}
 }

@@ -20,22 +20,29 @@ public class Cleaner implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(length=45)
+	@Column(length=45,nullable = false)
 	private String address;
 
 	@Column(length=45)
 	private String adhaar;
 
-	@Column(name="alternate_mobile")
+	@Column(name="alternate_mobile",nullable = false)
 	private int alternateMobile;
 
+	@Column(length=11,nullable = false)
 	private int mobile;
 
+	@Column(length=45,nullable = false)
+	private String f_name;
+
 	@Column(length=45)
-	private String name;
+	private String l_name;
 
 	@Column(length=45)
 	private String pan;
+
+	@ManyToOne
+	private Location location;
 
 	//bi-directional many-to-one association to CleanerInventoryTx
 	@OneToMany(mappedBy="cleaner")
@@ -46,6 +53,17 @@ public class Cleaner implements Serializable {
 	private List<VehicleCleanerTx> vehicleCleanerTxs;
 
 	public Cleaner() {
+	}
+
+	public Cleaner(String address, String adhaar, int alternateMobile, int mobile, String f_name, String l_name, String pan, Location location) {
+		this.address = address;
+		this.adhaar = adhaar;
+		this.alternateMobile = alternateMobile;
+		this.mobile = mobile;
+		this.f_name = f_name;
+		this.l_name = l_name;
+		this.pan = pan;
+		this.location = location;
 	}
 
 	public int getId() {
@@ -88,13 +106,6 @@ public class Cleaner implements Serializable {
 		this.mobile = mobile;
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getPan() {
 		return this.pan;
@@ -148,4 +159,27 @@ public class Cleaner implements Serializable {
 		return vehicleCleanerTx;
 	}
 
+	public String getF_name() {
+		return f_name;
+	}
+
+	public void setF_name(String f_name) {
+		this.f_name = f_name;
+	}
+
+	public String getL_name() {
+		return l_name;
+	}
+
+	public void setL_name(String l_name) {
+		this.l_name = l_name;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
 }

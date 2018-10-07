@@ -9,4 +9,8 @@ public interface LocationRepository extends JpaRepository<Location, Integer> {
 
     @Override
     List<Location> findAll();
+
+    @Override
+    Location getOne(Integer integer);
+
 }
