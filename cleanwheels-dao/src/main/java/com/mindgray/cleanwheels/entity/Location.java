@@ -41,6 +41,11 @@ public class Location implements Serializable {
 	public Location() {
 	}
 
+	public Location(String city, String society) {
+		this.city = city;
+		this.society = society;
+	}
+
 	public int getId() {
 		return this.id;
 	}
