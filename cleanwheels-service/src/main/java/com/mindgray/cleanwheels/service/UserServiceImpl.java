@@ -4,16 +4,15 @@ package com.mindgray.cleanwheels.service;
 import com.mindgray.cleanwheels.dto.requestDto.ProfileRequestDTO;
 import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
 import com.mindgray.cleanwheels.dto.requestDto.UpdateProfileRequestDTO;
-import com.mindgray.cleanwheels.exception.CleanWheelsException;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mindgray.cleanwheels.dto.LoginDto;
-import com.mindgray.cleanwheels.dto.RegistrationDto;
-import com.mindgray.cleanwheels.dto.ResetPasswordDto;
-import com.mindgray.cleanwheels.dto.UserProfileDto;
+import com.mindgray.cleanwheels.dto.responseDto.LoginDto;
+import com.mindgray.cleanwheels.dto.responseDto.RegistrationDto;
+import com.mindgray.cleanwheels.dto.responseDto.ResetPasswordDto;
+import com.mindgray.cleanwheels.dto.responseDto.UserProfileDto;
 import com.mindgray.cleanwheels.entity.User;
 import com.mindgray.cleanwheels.repository.UserRepository;
 

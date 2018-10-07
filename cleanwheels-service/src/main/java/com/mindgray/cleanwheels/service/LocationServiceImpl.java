@@ -1,7 +1,7 @@
 package com.mindgray.cleanwheels.service;
 
-import com.mindgray.cleanwheels.dto.LocationResponseDto;
 import com.mindgray.cleanwheels.dto.requestDto.LocationRequestDto;
+import com.mindgray.cleanwheels.dto.responseDto.AddLocationResponseDto;
 import com.mindgray.cleanwheels.entity.Location;
 import com.mindgray.cleanwheels.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,13 @@ public class LocationServiceImpl implements LocationService {
     LocationRepository locationRepository;
 
     @Override
-    public boolean addLocation(LocationRequestDto locationRequestDto) {
+    public AddLocationResponseDto addLocation(LocationRequestDto locationRequestDto) {
         Location location = locationRepository.save(new Location(locationRequestDto.getCity(), locationRequestDto.getSociety()));
         if (location != null)
-            return true;
+
+            return new AddLocationResponseDto(location.getId());
         else
-            return false;
+            return null;
     }
 
     @Override

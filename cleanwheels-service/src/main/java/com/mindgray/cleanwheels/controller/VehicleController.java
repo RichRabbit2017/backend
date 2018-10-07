@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mindgray.cleanwheels.constant.Constant;
 import com.mindgray.cleanwheels.constant.CwMessages;
 import com.mindgray.cleanwheels.dto.AddVehicleRequestDto;
-import com.mindgray.cleanwheels.dto.AddVehicleResponseDto;
-import com.mindgray.cleanwheels.dto.VehicleDetailResponseDto;
+import com.mindgray.cleanwheels.dto.responseDto.VehicleDetailResponseDto;
 import com.mindgray.cleanwheels.response.ResponseBody;
 import com.mindgray.cleanwheels.service.VehicleService;
 

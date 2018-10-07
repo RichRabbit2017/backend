@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.mindgray.cleanwheels.dto.LoginDto;
+import com.mindgray.cleanwheels.dto.responseDto.LoginDto;
 import com.mindgray.cleanwheels.entity.User;
 
 
@@ -13,7 +13,7 @@ import com.mindgray.cleanwheels.entity.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, String> {
 
-    @Query(value = "select new com.mindgray.cleanwheels.dto.LoginDto("
+    @Query(value = "select new com.mindgray.cleanwheels.dto.responseDto.LoginDto("
             + " u.userId) "
             + " from User u "
             + " where u.password=:password "

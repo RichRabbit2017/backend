@@ -3,6 +3,7 @@ package com.mindgray.cleanwheels.controller;
 import com.mindgray.cleanwheels.constant.CwMessages;
 import com.mindgray.cleanwheels.dto.requestDto.LocationRequestDto;
 import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
+import com.mindgray.cleanwheels.dto.responseDto.AddLocationResponseDto;
 import com.mindgray.cleanwheels.entity.Location;
 import com.mindgray.cleanwheels.exception.CleanWheelsException;
 import com.mindgray.cleanwheels.repository.LocationRepository;
@@ -23,10 +24,10 @@ public class LocationController {
     @PostMapping(value = "/addLocation")
     public ResponseBody addLocation(@RequestBody LocationRequestDto locationRequestDto) {
         try {
-            boolean isLocationAdded = locationService.addLocation(locationRequestDto);
+            AddLocationResponseDto isLocationAdded = locationService.addLocation(locationRequestDto);
 
-            if (isLocationAdded)
-                return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), null);
+            if (isLocationAdded!=null)
+                return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), isLocationAdded);
             else
                 return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
 

@@ -1,16 +1,20 @@
-package com.mindgray.cleanwheels.dto;
+package com.mindgray.cleanwheels.dto.responseDto;
 
 import java.io.Serializable;
 
-public class ResetPasswordDto implements Serializable{
+public class LoginDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public ResetPasswordDto() {
+	public LoginDto() {
 
 	}
 
-	public ResetPasswordDto(String userId, String jwt) {
+	public LoginDto(String userId) {
+		this.userId = userId;
+	}
+	
+	public LoginDto(String userId, String jwt) {
 		this.userId = userId;
 		this.jwt = jwt;
 	}

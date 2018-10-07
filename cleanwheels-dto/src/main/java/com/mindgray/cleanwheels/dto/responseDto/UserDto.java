@@ -1,4 +1,4 @@
-package com.mindgray.cleanwheels.dto;
+package com.mindgray.cleanwheels.dto.responseDto;
 
 
 public class UserDto {

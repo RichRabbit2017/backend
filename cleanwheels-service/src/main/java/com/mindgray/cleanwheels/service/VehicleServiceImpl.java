@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mindgray.cleanwheels.dto.AddVehicleRequestDto;
-import com.mindgray.cleanwheels.dto.VehicleDetailResponseDto;
+import com.mindgray.cleanwheels.dto.responseDto.VehicleDetailResponseDto;
 import com.mindgray.cleanwheels.entity.User;
 import com.mindgray.cleanwheels.entity.Vehicle;
 import com.mindgray.cleanwheels.repository.UserRepository;
