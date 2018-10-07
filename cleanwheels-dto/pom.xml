@@ -18,7 +18,10 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
+
+
   <parent>
   	<groupId>com.mindgray</groupId>
   	<artifactId>cleanwheels-base</artifactId>

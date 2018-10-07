@@ -112,10 +112,26 @@ public class Location implements Serializable {
 	}
 
 	public List<Cleaner> getCleaners() {
-		return cleaners;
+		return this.cleaners;
 	}
 
 	public void setCleaners(List<Cleaner> cleaners) {
 		this.cleaners = cleaners;
 	}
+
+	public Cleaner addCleaner(Cleaner cleaner) {
+		getCleaners().add(cleaner);
+		cleaner.setLocation(this);
+
+		return cleaner;
+	}
+
+	public Cleaner removeCleaner(Cleaner cleaner) {
+		getCleaners().remove(cleaner);
+		cleaner.setLocation(null);
+
+		return cleaner;
+	}
+
+
 }

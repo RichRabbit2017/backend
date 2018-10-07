@@ -2,6 +2,7 @@ package com.mindgray.cleanwheels.controller;
 
 import com.mindgray.cleanwheels.constant.CwMessages;
 import com.mindgray.cleanwheels.dto.requestDto.AddCleanerRequestDto;
+import com.mindgray.cleanwheels.dto.responseDto.CleanerResponseDto;
 import com.mindgray.cleanwheels.entity.Cleaner;
 import com.mindgray.cleanwheels.response.ResponseBody;
 import com.mindgray.cleanwheels.service.CleanerService;
@@ -31,8 +32,9 @@ public class CleanerController {
     public ResponseBody getCleanerById(@RequestParam int id)
     {
       Cleaner cleaner =  cleanerService.getCleanerById(id);
-        if(cleaner!=null)
-            return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), cleaner);
+        CleanerResponseDto cleanerResponseDto = new CleanerResponseDto(cleaner.getF_name(),cleaner.getL_name(),cleaner.getAddress(),cleaner.getMobile(),cleaner.getAlternateMobile(),cleaner.getAdhaar(),cleaner.getPan(),cleaner.getId(),cleaner.getLocation().getId());
+        if(cleaner!=null )
+            return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), cleanerResponseDto);
         else
             return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
     }
