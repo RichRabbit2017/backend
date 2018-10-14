@@ -10,14 +10,14 @@ import com.mindgray.cleanwheels.dto.requestDto.UpdateProfileRequestDTO;
 
 public interface UserService {
 
-	RegistrationDto registerUSer(RegisterRequestDTO registerRequestDTO) throws Exception;
+	RegistrationDto registerUSer(RegisterRequestDTO registerRequestDTO);
 
-	LoginDto loginUser(RegisterRequestDTO registerRequestDTO) throws Exception;
+	LoginDto loginUser(RegisterRequestDTO registerRequestDTO);
 
-	ResetPasswordDto resetPassword(RegisterRequestDTO registerRequestDTO) throws Exception;
+	ResetPasswordDto resetPassword(RegisterRequestDTO registerRequestDTO);
 
-	UserProfileDto getProfile(ProfileRequestDTO profileRequestDTO) throws Exception;
+	UserProfileDto getProfile(ProfileRequestDTO profileRequestDTO);
 
-	UpdateProfileRequestDTO updateProfile(UpdateProfileRequestDTO updateProfileRequestDTO) throws Exception;
+	UpdateProfileRequestDTO updateProfile(UpdateProfileRequestDTO updateProfileRequestDTO);
 
 }

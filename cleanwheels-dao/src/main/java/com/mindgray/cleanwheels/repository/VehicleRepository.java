@@ -17,4 +17,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Integer>{
 			+ " where u.userId=:userId ")
 	VehicleDetailResponseDto getVehicle(@Param("userId")String userId);
 
+	
+	Vehicle findDisctinctVehicleByNum(String vehicleNum);
 }

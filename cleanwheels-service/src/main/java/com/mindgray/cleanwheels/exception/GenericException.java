@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GenericException {
 
-    @ExceptionHandler(CleanWheelsException.class)
-    public ResponseEntity<ResponseBody> resourceNotFound(CleanWheelsException ex) {
+    @ExceptionHandler(CWException.class)
+    public ResponseEntity<ResponseBody> resourceNotFound(CWException ex) {
         ResponseBody response = new ResponseBody();
         response.setSuccess(false);
-        response.setCode(((CleanWheelsException)ex).getErrorCode());
+        response.setCode(((CWException)ex).getErrorCode());
         response.setMessage(ex.getMessage());
 
         return new ResponseEntity<ResponseBody>(response, HttpStatus.BAD_REQUEST);

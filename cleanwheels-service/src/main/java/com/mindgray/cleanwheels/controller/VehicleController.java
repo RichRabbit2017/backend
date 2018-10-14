@@ -14,6 +14,7 @@ import com.mindgray.cleanwheels.constant.Constant;
 import com.mindgray.cleanwheels.constant.CwMessages;
 import com.mindgray.cleanwheels.dto.AddVehicleRequestDto;
 import com.mindgray.cleanwheels.dto.responseDto.VehicleDetailResponseDto;
+import com.mindgray.cleanwheels.dto.BookServiceRequestDto;
 import com.mindgray.cleanwheels.response.ResponseBody;
 import com.mindgray.cleanwheels.service.VehicleService;
 
@@ -45,8 +46,22 @@ public class VehicleController {
     	boolean vehicleAdded= vehicleService.addVehicle(addVehicleRequestDto);
 
         if (vehicleAdded == true)
-            return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), Constant.VEHICLE_ADDED);
+            return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), CwMessages.VEHICLE_ADDED);
     
         return responseBody;
     }
+    
+    
+    @PostMapping(value = "/bookService")
+    public ResponseBody bookService(@RequestBody BookServiceRequestDto bookServiceRequestDto) {
+    	ResponseBody responseBody = new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
+
+    	boolean serviceBooked= vehicleService.bookService(bookServiceRequestDto);
+
+        if (serviceBooked == true)
+            return new ResponseBody(true, CwMessages.SUCCESS.code(), CwMessages.SUCCESS.message(), CwMessages.VEHICLE_ADDED);
+    
+        return responseBody;
+    }
+    
 }

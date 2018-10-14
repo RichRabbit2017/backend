@@ -1,12 +1,12 @@
 package com.mindgray.cleanwheels.service;
 
-import com.mindgray.cleanwheels.entity.Vouchers;
+import com.mindgray.cleanwheels.entity.Voucher;
 
 public interface VoucherService {
 
    boolean addVouchers();
-   Vouchers validateVouchers(int id);
-   Vouchers getVouchers(String code);
+   Voucher validateVouchers(int id);
+   Voucher getVouchers(String code);
    boolean redeemVouchers(int id);
-   Vouchers updateVouchers();
+   Voucher updateVouchers();
 }

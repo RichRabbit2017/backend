@@ -1,6 +1,6 @@
 package com.mindgray.cleanwheels.service;
 
-import com.mindgray.cleanwheels.entity.Vouchers;
+import com.mindgray.cleanwheels.entity.Voucher;
 import com.mindgray.cleanwheels.repository.VouchersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +17,12 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
-    public Vouchers validateVouchers(int id) {
+    public Voucher validateVouchers(int id) {
         return null;
     }
 
     @Override
-    public Vouchers getVouchers(String code) {
+    public Voucher getVouchers(String code) {
         return null;
     }
 
@@ -32,7 +32,7 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
-    public Vouchers updateVouchers() {
+    public Voucher updateVouchers() {
         return null;
     }
 }

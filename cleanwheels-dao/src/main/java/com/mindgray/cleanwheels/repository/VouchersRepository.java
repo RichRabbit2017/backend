@@ -1,9 +1,9 @@
 package com.mindgray.cleanwheels.repository;
 
-import com.mindgray.cleanwheels.entity.Vouchers;
+import com.mindgray.cleanwheels.entity.Voucher;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VouchersRepository extends JpaRepository<Vouchers,Integer> {
-    Vouchers findVouchersByCode(String code);
+public interface VouchersRepository extends JpaRepository<Voucher,Integer> {
+    Voucher findVouchersByCode(String code);
 
 }

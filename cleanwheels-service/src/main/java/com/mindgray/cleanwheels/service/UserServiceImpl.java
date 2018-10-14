@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public RegistrationDto registerUSer(RegisterRequestDTO registerRequestDTO) throws Exception {
+    public RegistrationDto registerUSer(RegisterRequestDTO registerRequestDTO) {
 			User user = new User(registerRequestDTO.getMobile(), registerRequestDTO.getEmail(), registerRequestDTO.getPassword(), RandomStringUtils.random(4, true, true));
 			User registerdUser = userRepository.save(user);
 			return new RegistrationDto(registerdUser.getUser_id());
@@ -32,12 +32,12 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public LoginDto loginUser(RegisterRequestDTO registerRequestDTO) throws Exception {
+	public LoginDto loginUser(RegisterRequestDTO registerRequestDTO) {
 		return userRepository.authenticateLogin(registerRequestDTO.getMobile(), registerRequestDTO.getEmail(), registerRequestDTO.getPassword());
 	}
 
 	@Override
-	public ResetPasswordDto resetPassword(RegisterRequestDTO registerRequestDTO) throws Exception {
+	public ResetPasswordDto resetPassword(RegisterRequestDTO registerRequestDTO) {
 		User user = userRepository.findUserByMobileOrEmail(registerRequestDTO.getMobile(), registerRequestDTO.getEmail());
 		if (user != null && registerRequestDTO.getPassword()!=null && !registerRequestDTO.getPassword().isEmpty()) {
 			user.setPassword(registerRequestDTO.getPassword());
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	   public UserProfileDto getProfile(ProfileRequestDTO profileRequestDTO) throws Exception {
+	   public UserProfileDto getProfile(ProfileRequestDTO profileRequestDTO) {
 	       User user = userRepository.getOne(profileRequestDTO.getUserId());
 	       if(user!=null) {
 	          return new UserProfileDto(user.getUser_id(),user.getF_name(),"",user.getMobile(),"",user.getCity(),user.getSociety(),user.getSector(),user.getFlatNo());
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 	   }
 	   @Transactional
 	   @Override
-	   public UpdateProfileRequestDTO updateProfile(UpdateProfileRequestDTO updateProfileRequestDTO) throws Exception {
+	   public UpdateProfileRequestDTO updateProfile(UpdateProfileRequestDTO updateProfileRequestDTO) {
 	       User user = userRepository.getOne(updateProfileRequestDTO.getUserId());
 	       if(user!=null) {
 	           user.setCity(updateProfileRequestDTO.getCity());

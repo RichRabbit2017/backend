@@ -14,10 +14,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @EnableAutoConfiguration
 public class App extends SpringBootServletInitializer
 {
-    //    public static void main( String[] args )
-//    {
-//        System.out.println( "Hello World!" );
-//    }
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 

@@ -1,18 +1,21 @@
 package com.mindgray.cleanwheels.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.mindgray.cleanwheels.constant.CwMessages;
 import com.mindgray.cleanwheels.dto.requestDto.LocationRequestDto;
-import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
 import com.mindgray.cleanwheels.dto.responseDto.AddLocationResponseDto;
 import com.mindgray.cleanwheels.entity.Location;
-import com.mindgray.cleanwheels.exception.CleanWheelsException;
-import com.mindgray.cleanwheels.repository.LocationRepository;
+import com.mindgray.cleanwheels.exception.CWException;
 import com.mindgray.cleanwheels.response.ResponseBody;
 import com.mindgray.cleanwheels.service.LocationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -32,7 +35,7 @@ public class LocationController {
                 return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
 
         } catch (Exception e) {
-            throw new CleanWheelsException(e.getMessage(), CwMessages.UNKNOWN.code());
+            throw new CWException(e.getMessage(), CwMessages.UNKNOWN.code());
         }
 
     }
@@ -48,7 +51,7 @@ public class LocationController {
                 return new ResponseBody(false, CwMessages.FAILED.code(), CwMessages.FAILED.message());
 
         } catch (Exception e) {
-            throw new CleanWheelsException(e.getMessage(), CwMessages.UNKNOWN.code());
+            throw new CWException(e.getMessage(), CwMessages.UNKNOWN.code());
         }
     }
 

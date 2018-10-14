@@ -17,7 +17,7 @@ import com.mindgray.cleanwheels.dto.responseDto.UserProfileDto;
 import com.mindgray.cleanwheels.dto.requestDto.ProfileRequestDTO;
 import com.mindgray.cleanwheels.dto.requestDto.RegisterRequestDTO;
 import com.mindgray.cleanwheels.dto.requestDto.UpdateProfileRequestDTO;
-import com.mindgray.cleanwheels.exception.CleanWheelsException;
+import com.mindgray.cleanwheels.exception.CWException;
 import com.mindgray.cleanwheels.response.ResponseBody;
 import com.mindgray.cleanwheels.service.UserService;
 
@@ -42,7 +42,7 @@ public class UserController {
         }catch (Exception e)
         {
             logger.error(e.getMessage());
-            throw new CleanWheelsException(CwMessages.REGISTRATION_FAILED.message(),CwMessages.REGISTRATION_FAILED.code());
+            throw new CWException(CwMessages.REGISTRATION_FAILED.message(),CwMessages.REGISTRATION_FAILED.code());
         }
     }
     
@@ -57,7 +57,7 @@ public class UserController {
         }catch (Exception e)
         {
             logger.error(e.getMessage());
-            throw new CleanWheelsException(e.getMessage(),CwMessages.UNKNOWN.code());
+            throw new CWException(e.getMessage(),CwMessages.UNKNOWN.code());
         }
     }
     
@@ -72,7 +72,7 @@ public class UserController {
         }catch (Exception e)
         {
             logger.error(e.getMessage());
-            throw new CleanWheelsException(e.getMessage(),CwMessages.UNKNOWN.code());
+            throw new CWException(e.getMessage(),CwMessages.UNKNOWN.code());
         }
     }
     
@@ -87,7 +87,7 @@ public class UserController {
         }catch (Exception e)
         {
             logger.error(e.getMessage());
-            throw new CleanWheelsException(e.getMessage(),CwMessages.UNKNOWN.code());
+            throw new CWException(e.getMessage(),CwMessages.UNKNOWN.code());
         }
 
     }
@@ -103,7 +103,7 @@ public class UserController {
         }catch (Exception e)
         {
             logger.error(e.getMessage());
-            throw new CleanWheelsException(e.getMessage(),CwMessages.UNKNOWN.code());
+            throw new CWException(e.getMessage(),CwMessages.UNKNOWN.code());
         }
 
     }
