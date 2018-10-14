@@ -98,8 +98,10 @@ public class VehicleServiceImpl implements VehicleService{
 		
 		vehiclePackageTx = vehiclePackageTxRepository.save(vehiclePackageTx);
 		
-		if(vehiclePackageTx.getId() != null && voucher != null && voucher.getType() == Constant.VOUCHER_SINGLE_USE){
-			voucher.setRedeemed(Constant.VOUCHER_REDEEMED);
+		if(vehiclePackageTx != null){
+			if(voucher != null && vehiclePackageTx.getId() != null && voucher.getType() == Constant.VOUCHER_SINGLE_USE){
+				voucher.setRedeemed(Constant.VOUCHER_REDEEMED);
+			}
 			return true;
 		}
 		return false;
